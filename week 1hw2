@@ -1,0 +1,28 @@
+public class WordFrequency {
+    public static int getWordFrequency(String[] wordsList, int listSize, String currWord) {
+        int count = 0;
+        for (int i = 0; i < listSize; i++) {
+            if (wordsList[i].equalsIgnoreCase(currWord)) {
+                count++;
+            }
+        }
+        return count;
+    }
+
+    public static void main(String[] args) {
+        // words
+        String[] words = {
+            "hello", "my", "hello", "my", "name",
+            "hello", "is", "ray", "my", "name",
+            "hello", "is", "ray", "hello", "my",
+            "name", "is", "ray"
+        };
+
+        int numWords = words.length;
+
+        for (int i = 0; i < numWords; i++) {
+            int freq = getWordFrequency(words, numWords, words[i]);
+            System.out.println(words[i] + " " + freq);
+        }
+    }
+}
