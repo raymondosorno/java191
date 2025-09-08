@@ -1,0 +1,168 @@
+import java.util.Scanner;
+
+public class IncomeTaxMain {
+
+   // prompt for an integer
+   public static int getInteger(Scanner input, String prompt) {
+      int inputValue;
+      System.out.println(prompt + ": ");
+      inputValue = input.nextInt();
+      return inputValue;
+   }
+
+   public static void main(String[] args) {
+      final String PROMPT_SALARY = "\nEnter annual salary (-1 to exit)";
+      Scanner scnr = new Scanner(System.in);
+      int annualSalary;
+      double taxRate;
+      int taxToPay;
+
+      // new tables to use
+      int[] salary = { 0, 20000, 50000, 100000, Integer.MAX_VALUE };
+      double[] taxTable = { 0.0, 0.10, 0.20, 0.30, 0.40 };
+
+      // use helper class
+      TaxTableTools table = new TaxTableTools();
+
+      // call the setter to load the tables
+      table.setTables(salary, taxTable);
+
+      // first input
+      annualSalary = getInteger(scnr, PROMPT_SALARY);
+
+      while (annualSalary >= 0) {
+         taxRate = table.getValue(annualSalary);
+         taxToPay = (int) (annualSalary * taxRate); // truncate to int
+         System.out.println("Annual Salary: " + annualSalary +
+                            "\tTax rate: " + taxRate +
+                            "\tTax to pay: " + taxToPay);
+
+         // next input
+         annualSalary = getInteger(scnr, PROMPT_SALARY);
+      }
+
+      scnr.close();
+   }
+}
+
+
+//////////////////////////////////////////////////////////
+public class TaxTableTools {
+
+   // tables to search
+   private int [] search  = { 0, 20000, 50000, 100000, Integer.MAX_VALUE };
+   private double [] value = { 0.0, 0.10, 0.20, 0.30, 0.40 };
+   private int nEntries;
+
+   // default constructor
+   public TaxTableTools() {
+      nEntries = search.length;
+   }
+
+   // setter to load new tables
+   public void setTables(int[] newSearch, double[] newValue) {
+      search = newSearch;
+      value = newValue;
+      nEntries = search.length;
+   }
+
+   // return value from table based on range
+   public double getValue(int searchArgument) {
+      double result = 0.0;
+      boolean keepLooking = true;
+      int i = 0;
+
+      while ((i < nEntries) && keepLooking) {
+         if (searchArgument <= search[i]) {
+            result = value[i];
+            keepLooking = false;
+         } else {
+            i = i + 1;
+         }
+      }
+
+      return result;
+   }
+}
+////////////////////////////////////TASKTWO
+import java.util.Scanner;
+
+public class IncomeTaxMain {
+   public static void main(String [] args) {
+      final String PROMPT_SALARY = "\nEnter annual salary (-1 to exit)";
+      Scanner scnr = new Scanner(System.in);
+      int annualSalary;
+      double taxRate;
+      int taxToPay;
+
+      // new salary and tax tables
+      int [] salaryRange = { 0, 30000, 60000, Integer.MAX_VALUE };
+      double [] taxRates = { 0.0, 0.25, 0.35, 0.45 };
+
+      // use overloaded constructor
+      TaxTableTools table = new TaxTableTools(salaryRange, taxRates);
+
+      // first input
+      annualSalary = table.getInteger(scnr, PROMPT_SALARY);
+
+      while (annualSalary >= 0) {
+         taxRate = table.getValue(annualSalary);
+         taxToPay = (int)(annualSalary * taxRate); // truncate to int
+         System.out.println("Annual Salary: " + annualSalary +
+                            "\tTax rate: " + taxRate +
+                            "\tTax to pay: " + taxToPay);
+
+         // next input
+         annualSalary = table.getInteger(scnr, PROMPT_SALARY);
+      }
+
+      scnr.close();
+   }
+}
+//////////////////////////////////////////////////////////
+import java.util.Scanner;
+
+public class TaxTableTools {
+
+   // tables to search
+   private int [] search = { 0, 20000, 50000, 100000, Integer.MAX_VALUE };
+   private double [] value = { 0.0, 0.10, 0.20, 0.30, 0.40 };
+   private int nEntries;
+
+   // default constructor
+   public TaxTableTools() {
+      nEntries = search.length;
+   }
+
+   // overloaded constructor
+   public TaxTableTools(int[] newSearch, double[] newValue) {
+      search = newSearch;
+      value = newValue;
+      nEntries = search.length;
+   }
+
+   // method to prompt for an integer
+   public int getInteger(Scanner input, String prompt) {
+      int inputValue = 0;
+      System.out.println(prompt + ": ");
+      inputValue = input.nextInt();
+      return inputValue;
+   }
+
+   // get a value from table
+   public double getValue(int searchArgument) {
+      double result = 0.0;
+      boolean keepLooking = true;
+      int i = 0;
+
+      while ((i < nEntries) && keepLooking) {
+         if (searchArgument <= search[i]) {
+            result = value[i];
+            keepLooking = false;
+         } else {
+            i = i + 1;
+         }
+      }
+      return result;
+   }
+}
