@@ -1,0 +1,57 @@
+class Monster {
+    String name; // this field lives inside the Monster object (on the HEAP)
+    int hp;      // this field also lives inside the Monster object (on the HEAP)
+
+    // Constructor: runs when we do "new Monster()"
+    Monster(String monsterName, int monsterHp) {
+        // The parameters (monsterName, monsterHp) are temporary STACK variables.
+        // "this.name" and "this.hp" refer to the fields inside the object.
+        this.name = monsterName;
+        this.hp = monsterHp;
+    }
+
+    // Make the monster take some damage
+    void takeDamage(int amount) {
+        hp = hp - amount;
+        System.out.println(name + " takes " + amount + " damage! HP now: " + hp);
+    }
+
+    // Check if the monster is dead (0 or less HP)
+    boolean isDead() {
+        return hp <= 0;
+    }
+}
+//*===================================
+===================================*//
+/**
+ *
+ * @author raymondiosorno
+ */
+public class RPGDemo {
+    public static void main(String[] args) {
+
+        // STEP 1: Create one Monster object
+        Monster goblin = new Monster("Goblin", 10);
+        // STACK: variable "goblin" lives here and holds a reference
+        // HEAP: Monster object ("Goblin", 10) lives here
+
+        System.out.println("\nCreated a Monster on the HEAP, referenced by 'goblin' on the STACK.");
+
+        // STEP 2: Interact with the object
+        goblin.takeDamage(3); // call a method on the Monster object
+        goblin.takeDamage(5);
+
+        // STEP 3: Make the object eligible for Garbage Collect
+        System.out.println("\nNow we drop the reference to the goblin.");
+        goblin = null; // remove the STACK reference to the Monster
+
+        // At this point, no variable points to the Monster object anymore.
+        // The Monster object on the HEAP is now "unreachable".
+        // This makes it *eligible* for Garbage Collection.
+        // The JVM will eventually free it, but we do not control when.
+
+        System.out.println("The Monster object is now GC-eligible.");
+        System.out.println("End of program. When main() ends, even the 'goblin' variable disappears.");
+    }
+}
+
