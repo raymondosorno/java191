@@ -1,0 +1,57 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package InputOutput;
+
+/**
+ *
+ * @author raymondiosorno
+ */
+import java.io.BufferedReader; //read text from file
+import java.io.InputStreamReader; //same
+import java.io.InputStream; //same
+
+public class PhotoInfoFiles {
+    public static void main(String[] args) {
+        // Load the file ParkPhotos.txt from the resources folder
+        InputStream input = PhotoInfoFiles.class.getResourceAsStream("/ParkPhotos.txt");  //opens file from resource folder
+
+        if (input == null) { //if the file isnt found it will print this
+            System.out.println("File not found.");
+            return;
+        }
+
+        try {
+            BufferedReader br = new BufferedReader(new InputStreamReader(input)); //creates buffer to read txt line by line
+            String line = br.readLine(); //reads first line 
+
+            while (line != null) { //continuos loop until all lines are read
+                // Replace the ending
+                String newName = line.replace("_photo.jpg", "_info.txt"); //replaces ending of name
+                System.out.println(newName);// prints new name
+
+                // Read the next line
+                line = br.readLine();
+            }
+
+            br.close(); // closes reader when its done
+        } catch (Exception e) { //prints error message 
+            System.out.println("Error reading file."); // the message
+        }
+    }
+}
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
+Acadia2003_photo.jpg
+AmericanSamoa1989_photo.jpg
+BlackCanyonoftheGunnison1983_photo.jpg
+CarlsbadCaverns2010_photo.jpg
+CraterLake1996_photo.jpg
+GrandCanyon1996_photo.jpg
+IndianaDunes1987_photo.jpg
+LakeClark2009_photo.jpg
+Redwood1980_photo.jpg
+VirginIslands2007_photo.jpg
+Voyageurs2006_photo.jpg
+WrangellStElias1987_photo.jpg
+
