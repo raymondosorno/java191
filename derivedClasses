@@ -1,0 +1,91 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package DerivedClasses;
+
+/**
+ *
+ * @author raymondiosorno
+ */
+public class Course {
+   private String courseNumber;
+   private String courseTitle;
+
+   public void setCourseNumber(String number) {
+      courseNumber = number;
+   }
+
+   public void setCourseTitle(String title) {
+      courseTitle = title;
+   }
+   
+   public void printInfo() {
+      System.out.println("Course Information:");
+      System.out.println("   Course Number: " + courseNumber);
+      System.out.println("   Course Title: " + courseTitle);
+   }
+}
+////////////////////end of code ////////////////////////////////////////////////////////////////////////////////////////////////
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package DerivedClasses;
+
+/**
+ *
+ * @author raymondiosorno
+ */
+public class OfferedCourse extends Course {
+   private String instructorName;
+   private String location;
+   private String classTime;
+
+   public void setInstructorName(String name) {
+      instructorName = name;
+   }
+
+   public void setLocation(String place) {
+      location = place;
+   }
+
+   public void setClassTime(String time) {
+      classTime = time;
+   }
+
+   public void printInfo() {
+      super.printInfo();
+      System.out.println("   Instructor Name: " + instructorName);
+      System.out.println("   Location: " + location);
+      System.out.println("   Class Time: " + classTime);
+   }
+}
+////////////////////end of code ////////////////////////////////////////////////////////////////////////////////////////////////
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package DerivedClasses;
+
+/**
+ *
+ * @author raymondiosorno
+ */
+public class CourseInformation {
+   public static void main(String[] args) {
+      Course myCourse = new Course();
+      myCourse.setCourseNumber("ECE287");
+      myCourse.setCourseTitle("Digital Systems Design");
+
+      OfferedCourse myOfferedCourse = new OfferedCourse();
+      myOfferedCourse.setCourseNumber("ECE387");
+      myOfferedCourse.setCourseTitle("Embedded Systems Design");
+      myOfferedCourse.setInstructorName("Mark Patterson");
+      myOfferedCourse.setLocation("Wilson Hall 231");
+      myOfferedCourse.setClassTime("WF: 2-3:30 pm");
+
+      myCourse.printInfo();
+      myOfferedCourse.printInfo();
+   }
+}
