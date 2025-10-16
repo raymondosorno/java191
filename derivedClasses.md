@@ -1,3 +1,6 @@
+# heading 1
+
+```
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
@@ -8,6 +11,7 @@ package DerivedClasses;
  *
  * @author raymondiosorno
  */
+## heading 2
 public class Course {
    private String courseNumber;
    private String courseTitle;
@@ -89,3 +93,4 @@ public class CourseInformation {
       myOfferedCourse.printInfo();
    }
 }
+``` end of code
